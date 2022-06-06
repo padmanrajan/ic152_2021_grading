@@ -38,6 +38,10 @@ re_b3 = pd.read_csv('allResults/IC152-Dec2021-Exams-Batch 3-grades.csv',index_co
 re_b2 = pd.read_csv('allResults/IC152-Dec2021-Exams-Batch 2-grades.csv',index_col='Email address',na_values='-',skipfooter=1)
 re_b1 = pd.read_csv('allResults/IC152-Dec2021-Exams-Batch 1-grades.csv',index_col='Email address',na_values='-',skipfooter=1)
 
+# lab marks
+lab = pd.read_csv('allResults/labMarks.csv',index_col='Candidate Email')
+
+
 # replace all nans
 sq1.fillna(0,inplace=True)
 sq2.fillna(0,inplace=True)
@@ -91,11 +95,17 @@ foo['sq2'] =  (sq2['Grade'])/2 # out of 5
 foo['reEx'] = re_all['Grade']*6
 
 # total without lab component, out of 90 marks
-foo['total90'] = foo[['top2pt','sq1','sq2','reEx']].sum(axis=1)
+#foo['total90'] = foo[['top2pt','sq1','sq2','reEx']].sum(axis=1)
+
+# lab marks
+foo['lab'] = lab['Grade']
+
+# total 
+foo['total'] = foo[['top2pt','sq1','sq2','reEx','lab']].sum(axis=1)
 
 # write required columns into csv
 foo.to_csv('allData.csv')
-#foo.to_csv('ic152_2021.csv', columns=['Name','top2pt','sq1','sq2','reEx','total90'], header=['Name','top2pt(20)','sq1(5)','sq2(5)','reEx(60)','total(90)'])
+foo.to_csv('ic152_2021.csv', columns=['Name','top2pt','sq1','sq2','reEx','lab','total'], header=['Name','top2pt(20)','sq1(5)','sq2(5)','reEx(60)','lab(10)','total'])
 
 
 
