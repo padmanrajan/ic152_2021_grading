@@ -39,7 +39,7 @@ re_b2 = pd.read_csv('allResults/IC152-Dec2021-Exams-Batch 2-grades.csv',index_co
 re_b1 = pd.read_csv('allResults/IC152-Dec2021-Exams-Batch 1-grades.csv',index_col='Email address',na_values='-',skipfooter=1)
 
 # lab marks
-lab = pd.read_csv('allResults/labMarks.csv',index_col='Candidate Email')
+lab = pd.read_csv('allResults/labMarks_2.csv',index_col='Candidate Email')
 
 
 # replace all nans
